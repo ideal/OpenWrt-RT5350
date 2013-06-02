@@ -411,29 +411,9 @@ Index: package/mac80211/patches/630-rt2x00-support-rt5350.patch
 + 	case RF5372:
 + 	case RF5390:
 + 	case RF5392:
-+--- a/drivers/net/wireless/rt2x00/rt2800pci.c
-++++ b/drivers/net/wireless/rt2x00/rt2800pci.c
-+@@ -171,7 +171,7 @@
-+ #else
-+ static inline int rt2800pci_read_eeprom_pci(struct rt2x00_dev *rt2x00dev)
-+ {
-+-	return -EOPNOTSUPP;
-++	return 0;
-+ }
-+ 
-+ static inline int rt2800pci_efuse_detect(struct rt2x00_dev *rt2x00dev)
-+@@ -181,7 +181,7 @@
-+ 
-+ static inline int rt2800pci_read_eeprom_efuse(struct rt2x00_dev *rt2x00dev)
-+ {
-+-	return -EOPNOTSUPP;
-++	return 0;
-+ }
-+ #endif /* CONFIG_PCI */
-+ 
 +--- a/drivers/net/wireless/rt2x00/rt2x00.h
 ++++ b/drivers/net/wireless/rt2x00/rt2x00.h
-+@@ -194,6 +194,7 @@
++@@ -193,6 +193,7 @@
 + #define RT3572		0x3572
 + #define RT3593		0x3593
 + #define RT3883		0x3883	/* WSOC */
