@@ -29,7 +29,6 @@ This is achieved using the following code snippet:
      svn co svn://svn.openwrt.org/openwrt/trunk
      git clone https://github.com/Squonk42/OpenWrt-RT5350.git
      cd trunk
-     patch -p0 <../OpenWrt-RT5350/openwrt_add_pm25lq032_flash_support.patch
      patch -p0 <../OpenWrt-RT5350/openwrt_add_rt5350_wlan_support.patch
      patch -p0 <../OpenWrt-RT5350/openwrt_hame_mpr-a1.patch
      make menuconfig
@@ -52,13 +51,6 @@ Then copy the the resulting image to your TFTP server root, so you can Flash it 
      cp bin/ramips/openwrt-ramips-rt305x-mpr-a1-squashfs-sysupgrade.bin /tftpboot/
 
 ## Patch Contents
-
-### openwrt_add_pm25lq032_flash_support.patch
-
-This patch contains the definition of 3 SPI Flash chip that are commonly used in RT5350-based routers, but that are missing from the default OpenWrt MTD Flash device driver:
-* PMC PM25LQ032
-
-This patch is platform independent, as these definitions may also be useful to other non RT5350-based machines.
 
 ### openwrt_add_rt5350_wlan_support.patch
 
