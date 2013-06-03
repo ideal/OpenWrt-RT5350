@@ -230,7 +230,7 @@ Index: target/linux/ramips/image/Makefile
 @@ -331,6 +331,8 @@
 Image/Build/Profile/MOFI3500-3GN=$(call BuildFirmware/Default8M/$(1),$(1),mofi3500-3gn,MOFI3500-3GN)
 
-+Image/Build/Profile/MPR-A1=$(call BuildFirmware/Default4M/$(1),$(1),mpr-a1,MPR-A1)
++Image/Build/Profile/MPR_A1=$(call BuildFirmware/Default4M/$(1),$(1),mpr-a1,MPR-A1)
 +
 Image/Build/Profile/NBG-419N=$(call BuildFirmware/Default4M/$(1),$(1),nbg-419n,NBG-419N)
 
@@ -240,7 +240,7 @@ Image/Build/Profile/MZKW300NH2=$(call BuildFirmware/Edimax/$(1),$(1),mzk-w300nh2
  	$(call Image/Build/Profile/FREESTATION5,$(1))
  	$(call Image/Build/Profile/HW5503G,$(1))
  	$(call Image/Build/Profile/MOFI35003GN,$(1))
-+	$(call Image/Build/Profile/MPR-A1,$(1))
++	$(call Image/Build/Profile/MPR_A1,$(1))
  	$(call Image/Build/Profile/MZKW3000NH2,$(1))
  	$(call Image/Build/Profile/NBG419N,$(1))
  	$(call Image/Build/Profile/NW718,$(1))
