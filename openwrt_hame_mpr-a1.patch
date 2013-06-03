@@ -1,31 +1,3 @@
-Index: target/linux/ramips/files/arch/mips/ralink/rt305x/Kconfig
-===================================================================
---- target/linux/ramips/files/arch/mips/ralink/rt305x/Kconfig	(revision 35629)
-+++ target/linux/ramips/files/arch/mips/ralink/rt305x/Kconfig	(working copy)
-@@ -129,6 +129,11 @@
- 	select RALINK_DEV_GPIO_BUTTONS
- 	select RALINK_DEV_GPIO_LEDS
- 
-+config RT305X_MACH_MPR_A1
-+	bool "HAME MPR-A1 board support"
-+	select RALINK_DEV_GPIO_BUTTONS
-+	select RALINK_DEV_GPIO_LEDS
-+
- config RT305X_MACH_WR512_3GN
- 	bool "SH-WR512NU/WS-WR512N1-like 3GN router"
- 	select RALINK_DEV_GPIO_BUTTONS
-Index: target/linux/ramips/files/arch/mips/ralink/rt305x/Makefile
-===================================================================
---- target/linux/ramips/files/arch/mips/ralink/rt305x/Makefile	(revision 35629)
-+++ target/linux/ramips/files/arch/mips/ralink/rt305x/Makefile	(working copy)
-@@ -31,6 +31,7 @@
- obj-$(CONFIG_RT305X_MACH_FREESTATION5)  += mach-freestation5.o
- obj-$(CONFIG_RT305X_MACH_HW550_3G)	+= mach-hw550-3g.o
- obj-$(CONFIG_RT305X_MACH_MOFI3500_3GN)	+= mach-mofi3500-3gn.o
-+obj-$(CONFIG_RT305X_MACH_MPR_A1)	+= mach-mpr-a1.o
- obj-$(CONFIG_RT305X_MACH_NBG_419N)	+= mach-nbg-419n.o
- obj-$(CONFIG_RT305X_MACH_NW718)		+= mach-nw718.o
- obj-$(CONFIG_RT305X_MACH_OMNI_EMB)	+= mach-omni-emb.o
 Index: target/linux/ramips/files/arch/mips/ralink/rt305x/mach-mpr-a1.c
 ===================================================================
 --- target/linux/ramips/files/arch/mips/ralink/rt305x/mach-mpr-a1.c	(revision 0)
@@ -139,16 +111,6 @@ Index: target/linux/ramips/files/arch/mips/ralink/rt305x/mach-mpr-a1.c
 +
 +MIPS_MACHINE(RAMIPS_MACH_MPR_A1, "MPR-A1", "HAME MPR-A1",
 +             mpr_a1_init);
-Index: target/linux/ramips/files/arch/mips/include/asm/mach-ralink/machine.h
-===================================================================
---- target/linux/ramips/files/arch/mips/include/asm/mach-ralink/machine.h	(revision 35629)
-+++ target/linux/ramips/files/arch/mips/include/asm/mach-ralink/machine.h	(working copy)
-@@ -84,4 +84,5 @@
- 
- 	/* RT5350 based machines */
- 	RAMIPS_MACH_AIR3GII,		/* AirLive Air3GII */
-+	RAMIPS_MACH_MPR_A1		/* HAME MPR-A1 */
- };
 Index: target/linux/ramips/rt305x/profiles/hame.mk
 ===================================================================
 --- target/linux/ramips/rt305x/profiles/hame.mk	(revision 0)
@@ -171,23 +133,11 @@ Index: target/linux/ramips/rt305x/profiles/hame.mk
 +endef
 +
 +$(eval $(call Profile,MPR_A1))
-Index: target/linux/ramips/rt305x/config-3.7
-===================================================================
---- target/linux/ramips/rt305x/config-3.7	(revision 35629)
-+++ target/linux/ramips/rt305x/config-3.7	(working copy)
-@@ -121,6 +121,7 @@
- CONFIG_RT305X_MACH_FREESTATION5=y
- CONFIG_RT305X_MACH_HW550_3G=y
- CONFIG_RT305X_MACH_MOFI3500_3GN=y
-+CONFIG_RT305X_MACH_MPR_A1=y
- CONFIG_RT305X_MACH_MZKW300NH2=y
- CONFIG_RT305X_MACH_NBG_419N=y
- CONFIG_RT305X_MACH_NW718=y
 Index: target/linux/ramips/base-files/lib/preinit/06_set_iface_mac
 ===================================================================
---- target/linux/ramips/base-files/lib/preinit/06_set_iface_mac	(revision 35629)
+--- target/linux/ramips/base-files/lib/preinit/06_set_iface_mac	(revision 36822)
 +++ target/linux/ramips/base-files/lib/preinit/06_set_iface_mac	(working copy)
-@@ -22,6 +22,7 @@
+@@ -26,6 +26,7 @@
  	dir-620-a1 |\
  	esr-9753 |\
  	freestation5 |\
@@ -197,9 +147,9 @@ Index: target/linux/ramips/base-files/lib/preinit/06_set_iface_mac
  	rt-n56u |\
 Index: target/linux/ramips/base-files/lib/ramips.sh
 ===================================================================
---- target/linux/ramips/base-files/lib/ramips.sh	(revision 35629)
+--- target/linux/ramips/base-files/lib/ramips.sh	(revision 36822)
 +++ target/linux/ramips/base-files/lib/ramips.sh	(working copy)
-@@ -94,6 +94,9 @@
+@@ -112,6 +112,9 @@
  	*"MoFi Network MOFI3500-3GN")
  		name="mofi3500-3gn"
  		;;
@@ -211,9 +161,9 @@ Index: target/linux/ramips/base-files/lib/ramips.sh
  		;;
 Index: target/linux/ramips/base-files/lib/upgrade/platform.sh
 ===================================================================
---- target/linux/ramips/base-files/lib/upgrade/platform.sh	(revision 35629)
+--- target/linux/ramips/base-files/lib/upgrade/platform.sh	(revision 36822)
 +++ target/linux/ramips/base-files/lib/upgrade/platform.sh	(working copy)
-@@ -36,6 +36,7 @@
+@@ -42,6 +42,7 @@
  	freestation5 | \
  	hw550-3g | \
  	mofi3500-3gn | \
@@ -223,9 +173,9 @@ Index: target/linux/ramips/base-files/lib/upgrade/platform.sh
  	nw718 | \
 Index: target/linux/ramips/base-files/etc/hotplug.d/firmware/10-rt2x00-eeprom
 ===================================================================
---- target/linux/ramips/base-files/etc/hotplug.d/firmware/10-rt2x00-eeprom	(revision 35629)
+--- target/linux/ramips/base-files/etc/hotplug.d/firmware/10-rt2x00-eeprom	(revision 36822)
 +++ target/linux/ramips/base-files/etc/hotplug.d/firmware/10-rt2x00-eeprom	(working copy)
-@@ -71,6 +71,7 @@
+@@ -76,6 +76,7 @@
  	freestation5 | \
  	hw550-3g | \
  	mofi3500-3gn | \
@@ -235,9 +185,9 @@ Index: target/linux/ramips/base-files/etc/hotplug.d/firmware/10-rt2x00-eeprom
  	nw718 | \
 Index: target/linux/ramips/base-files/etc/uci-defaults/01_leds
 ===================================================================
---- target/linux/ramips/base-files/etc/uci-defaults/01_leds	(revision 35629)
+--- target/linux/ramips/base-files/etc/uci-defaults/01_leds	(revision 36822)
 +++ target/linux/ramips/base-files/etc/uci-defaults/01_leds	(working copy)
-@@ -81,6 +81,9 @@
+@@ -97,6 +97,9 @@
  	mzk-w300nh2)
  		set_wifi_led "mzkw300nh2:amber:wlan"
  		;;
@@ -249,11 +199,11 @@ Index: target/linux/ramips/base-files/etc/uci-defaults/01_leds
  		;;
 Index: target/linux/ramips/base-files/etc/uci-defaults/02_network
 ===================================================================
---- target/linux/ramips/base-files/etc/uci-defaults/02_network	(revision 35629)
+--- target/linux/ramips/base-files/etc/uci-defaults/02_network	(revision 36822)
 +++ target/linux/ramips/base-files/etc/uci-defaults/02_network	(working copy)
-@@ -153,6 +153,7 @@
- 	br6425 | \
+@@ -172,6 +172,7 @@
  	broadway | \
+	dir-620-d1 | \
  	f5d8235-v1 | \
 +	mpr-a1 | \
  	mzk-w300nh2 | \
@@ -261,9 +211,9 @@ Index: target/linux/ramips/base-files/etc/uci-defaults/02_network
  	psr-680w | \
 Index: target/linux/ramips/base-files/etc/diag.sh
 ===================================================================
---- target/linux/ramips/base-files/etc/diag.sh	(revision 35629)
+--- target/linux/ramips/base-files/etc/diag.sh	(revision 36822)
 +++ target/linux/ramips/base-files/etc/diag.sh	(working copy)
-@@ -73,6 +73,9 @@
+@@ -55,6 +55,9 @@
  	mofi3500-3gn)
  		status_led="mofi3500-3gn:green:status"
  		;;
@@ -275,24 +225,22 @@ Index: target/linux/ramips/base-files/etc/diag.sh
  		;;
 Index: target/linux/ramips/image/Makefile
 ===================================================================
---- target/linux/ramips/image/Makefile	(revision 35629)
+--- target/linux/ramips/image/Makefile	(revision 36822)
 +++ target/linux/ramips/image/Makefile	(working copy)
-@@ -555,6 +555,10 @@
- 	$(call Image/Build/Template/$(fs_squash)/$(1),GENERIC_8M,mofi3500-3gn,MOFI3500-3GN,ttyS1,57600,phys)
- endef
- 
-+define Image/Build/Profile/MPR_A1
-+	$(call Image/Build/Template/$(fs_squash)/$(1),GENERIC_4M,mpr-a1,MPR-A1,ttyS1,57600,spi)
-+endef
+@@ -331,6 +331,8 @@
+Image/Build/Profile/MOFI3500-3GN=$(call BuildFirmware/Default8M/$(1),$(1),mofi3500-3gn,MOFI3500-3GN)
+
++Image/Build/Profile/MPR-A1=$(call BuildFirmware/Default4M/$(1),$(1),mpr-a1,MPR-A1)
 +
- define Image/Build/Profile/NBG419N
- 	$(call Image/Build/Template/$(fs_squash)/$(1),GENERIC_4M,nbg-419n,NBG-419N,ttyS1,57600,phys)
- endef
-@@ -669,6 +673,7 @@
+Image/Build/Profile/NBG-419N=$(call BuildFirmware/Default4M/$(1),$(1),nbg-419n,NBG-419N)
+
+Image/Build/Profile/MZKW300NH2=$(call BuildFirmware/Edimax/$(1),$(1),mzk-w300nh2,MZK-W300NH2,$(mzkw300nh2_mtd_size),CSYS,RN52,0x50000,0xc0000)
+
+@@ -456,6 +456,7 @@
  	$(call Image/Build/Profile/FREESTATION5,$(1))
  	$(call Image/Build/Profile/HW5503G,$(1))
  	$(call Image/Build/Profile/MOFI35003GN,$(1))
-+	$(call Image/Build/Profile/MPR_A1,$(1))
++	$(call Image/Build/Profile/MPR-A1,$(1))
  	$(call Image/Build/Profile/MZKW3000NH2,$(1))
  	$(call Image/Build/Profile/NBG419N,$(1))
  	$(call Image/Build/Profile/NW718,$(1))
