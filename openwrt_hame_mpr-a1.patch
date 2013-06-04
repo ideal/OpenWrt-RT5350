@@ -249,22 +249,22 @@ Index: target/linux/ramips/base-files/etc/diag.sh
  		;;
 Index: target/linux/ramips/image/Makefile
 ===================================================================
---- target/linux/ramips/image/Makefile	(revision 36822)
+--- target/linux/ramips/image/Makefile	(revision 36828)
 +++ target/linux/ramips/image/Makefile	(working copy)
-@@ -331,6 +331,8 @@
-Image/Build/Profile/MOFI3500-3GN=$(call BuildFirmware/Default8M/$(1),$(1),mofi3500-3gn,MOFI3500-3GN)
+@@ -330,6 +330,8 @@
+
+ Image/Build/Profile/MOFI3500-3GN=$(call BuildFirmware/Default8M/$(1),$(1),mofi3500-3gn,MOFI3500-3GN)
 
 +Image/Build/Profile/MPR_A1=$(call BuildFirmware/Default4M/$(1),$(1),mpr-a1,MPR-A1)
 +
-Image/Build/Profile/NBG-419N=$(call BuildFirmware/Default4M/$(1),$(1),nbg-419n,NBG-419N)
+ Image/Build/Profile/NBG-419N=$(call BuildFirmware/Default4M/$(1),$(1),nbg-419n,NBG-419N)
 
-Image/Build/Profile/MZKW300NH2=$(call BuildFirmware/Edimax/$(1),$(1),mzk-w300nh2,MZK-W300NH2,$(mzkw300nh2_mtd_size),CSYS,RN52,0x50000,0xc0000)
-
-@@ -456,6 +456,7 @@
- 	$(call Image/Build/Profile/FREESTATION5,$(1))
- 	$(call Image/Build/Profile/HW5503G,$(1))
- 	$(call Image/Build/Profile/MOFI35003GN,$(1))
+ Image/Build/Profile/MZKW300NH2=$(call BuildFirmware/Edimax/$(1),$(1),mzk-w300nh2,MZK-W300NH2,$(mzkw300nh2_mtd_size),CSYS,RN52,0x50000,0xc0000)
+@@ -456,6 +458,7 @@
+	$(call Image/Build/Profile/FREESTATION5,$(1))
+	$(call Image/Build/Profile/HW550-3G,$(1))
+	$(call Image/Build/Profile/MOFI3500-3GN,$(1))
 +	$(call Image/Build/Profile/MPR_A1,$(1))
- 	$(call Image/Build/Profile/MZKW3000NH2,$(1))
- 	$(call Image/Build/Profile/NBG419N,$(1))
- 	$(call Image/Build/Profile/NW718,$(1))
+	$(call Image/Build/Profile/MZKW300NH2,$(1))
+	$(call Image/Build/Profile/NBG-419N,$(1))
+	$(call Image/Build/Profile/NW718,$(1))
